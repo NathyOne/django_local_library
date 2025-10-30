@@ -3,6 +3,8 @@ from django.urls import reverse # Used in get_absolute_url() to get URL for spec
 
 from django.db.models import UniqueConstraint # Constrains fields to unique values
 from django.db.models.functions import Lower
+import uuid # Required for unique book instances
+
 
 # Create your models here.
 # genre model
@@ -67,8 +69,14 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('-book-detail', args=[str(self.id)])
     
+    def display_genre(self):
+       
+       """Create a string for the Genre.
+         This is required to display genre in Admin."""
+       return ', '.join(genre.name for genre in self.genre.all()[:3])
 
-import uuid # Required for unique book instances
+    display_genre.short_description = 'Genre'
+    
 
 class BookInstance(models.Model):
 
