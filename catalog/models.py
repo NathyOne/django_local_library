@@ -47,7 +47,7 @@ class Language(models.Model):
             ),
         ]
 
-#genre model
+#Book model
 class Book(models.Model):
     title = models.CharField(max_length=50, unique=True, help_text="Enter the Title of the book")
     author = models.ForeignKey("Author", on_delete = models.RESTRICT,  null=True )
