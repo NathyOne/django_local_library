@@ -35,5 +35,16 @@ def index(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
 
+
+# class based view
 class BookListView(generic.ListView):
     model = Book
+    context_object_name = 'book_list'
+    queryset = Book.objects.filter(title__icontains='harry')[:5]
+    template_name = 'django_local_library/catalog/templates/catalog/book_list.html'
+
+
+# class books (generic.ListView):
+
+
+
